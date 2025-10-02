@@ -1,0 +1,32 @@
+<%- include('../partials/header') %>
+<h2>All Orders</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Items</th>
+      <th>Total</th>
+      <th>Status</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% orders.forEach(order => { %>
+      <tr>
+        <td><%= order.user?.email || "Guest" %></td>
+        <td>
+          <ul>
+            <% order.items.forEach(item => { %>
+              <li><%= item.product %> (x<%= item.quantity %>) - ₦<%= item.price %></li>
+            <% }) %>
+          </ul>
+        </td>
+        <td>₦<%= order.total %></td>
+        <td><%= order.status %></td>
+        <td><%= order.createdAt.toDateString() %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<%- include('../partials/footer') %>

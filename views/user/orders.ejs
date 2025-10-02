@@ -1,0 +1,42 @@
+<%- include('../partials/header') %>
+
+<h2>My Orders</h2>
+<table class="table">
+  <!-- <thead>
+    <tr>
+      <th>Items</th>
+      <th>Total</th>
+      <th>Status</th>
+      <th>Date</th>
+    </tr>
+  </thead> -->
+  <tbody>
+    <% if (orders.length === 0) { %>
+      <tr>
+        <td colspan="4" class="text-center">You have no orders yet.</td>
+      </tr>
+    <% } else { %>
+      <% orders.forEach(order => { %>
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5>Order ID: <%= order._id %></h5>
+      <p>Status: <%= order.status %></p>
+      <ul>
+        <% order.items.forEach(item => { %>
+          <li>
+            <strong><%= item.product %></strong> - ₦<%= item.price %>
+            <% if (item.secretInfo) { %>
+              <p class="text-success"> password: <%= item.secretInfo %></p>
+            <% } %>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
+  </div>
+<% }) %>
+
+    <% } %>
+  </tbody>
+</table>
+
+<%- include('../partials/footer') %>

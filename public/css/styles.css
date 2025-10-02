@@ -1,0 +1,96 @@
+:root {
+    --brand: #fdbd0d;   /* brand yellow */
+    --brand-bg: #fffbed; /* soft background */
+  }
+  
+  body {
+    background-color: var(--brand-bg);
+  }
+  
+  .navbar-brand {
+    letter-spacing: .3px;
+  }
+  
+  .card img.object-fit-cover {
+    object-fit: cover;
+  }
+  
+  .hero-section {
+    background-color: var(--brand); 
+    color: var(--brand-bg);
+    padding: 100px 20px;
+    border-radius: 12px;
+  }
+
+  /* Brand button */
+.btn-brand {
+    background-color: var(--brand);
+    color: #000; /* black text for contrast */
+    border: none;
+  }
+  
+  .btn-brand:hover {
+    background-color: #e0a800; /* darker shade on hover */
+    color: #000;
+  }
+  
+  /* Outline version */
+  .btn-brand-outline {
+    border: 2px solid var(--brand);
+    color: var(--brand);
+    background: transparent;
+  }
+  
+  .btn-brand-outline:hover {
+    background-color: var(--brand);
+    color: #000;
+  }
+/* Brand text color */
+.text-brand {
+  color: var(--brand) !important;
+}
+/* Brand colors */
+:root {
+    --brand: #fdbd0d;   /* yellow */
+    --brand-orange: #ff6b00; /* orange */
+  }
+  
+  /* About section */
+  .about-section {
+    background-color: var(--brand); /* yellow background */
+    color: var(--brand-orange);
+    padding: 60px 20px;
+    border-radius: 12px;
+  }
+  
+  .about-section h2,
+  .about-section h5,
+  .about-section p {
+    color: var(--brand-orange);
+  }
+  
+  .about-card {
+    border: 2px solid var(--brand-orange);
+    border-radius: 12px;
+    background-color: #fffbed; /* soft cream for contrast */
+    transition: transform 0.3s ease;
+  }
+  
+  .about-card:hover {
+    transform: translateY(-5px);
+  }
+    /* Navbar brand orange */
+.navbar-brand-orange {
+    background-color: var(--brand-orange) !important;
+  }
+  
+  .navbar-brand-orange .nav-link,
+  .navbar-brand-orange .navbar-brand {
+    color: #000 !important;  /* black text */
+  }
+  
+  .navbar-brand-orange .nav-link:hover {
+    color: #333 !important;  /* darker black on hover */
+  }
+  
+  

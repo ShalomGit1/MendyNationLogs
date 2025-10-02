@@ -1,0 +1,19 @@
+<%- include('../partials/header') %>
+<h2>All Users</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Joined</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% users.forEach(u => { %>
+      <tr>
+        <td><%= u.email %></td>
+        <td><%= u.createdAt.toDateString() %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+<%- include('../partials/footer') %>

@@ -1,0 +1,24 @@
+<%- include('partials/header') %>
+
+<div class="container mt-4">
+  <h1>Wallet Balance: ₦<%= (currentUser?.walletBalance || 0).toFixed(2) %></h1>
+
+  <% if (flash && flash.error) { %>
+    <div class="alert alert-danger"><%= flash.error %></div>
+  <% } %>
+  <% if (flash && flash.success) { %>
+    <div class="alert alert-success"><%= flash.success %></div>
+  <% } %>
+
+  <div class="card mt-3 p-3" style="max-width:420px">
+    <form action="/wallet/fund" method="POST">
+      <div class="mb-2">
+        <label class="form-label">Amount (₦)</label>
+        <input class="form-control" name="amount" type="number" min="100" required />
+      </div>
+      <button class="btn btn-success w-100">Fund Wallet</button>
+    </form>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

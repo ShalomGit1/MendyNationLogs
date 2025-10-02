@@ -1,0 +1,43 @@
+<%- include('partials/header') %>
+<div class="row justify-content-center">
+  <div class="col-md-8 col-lg-7">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <div class="d-flex align-items-start gap-3">
+          <% if (product.imageUrl) { %>
+            <img src="<%= product.imageUrl %>" class="rounded object-fit-cover" style="width: 120px; height: 120px;" alt="<%= product.name %>">
+          <% } %>
+          <div>
+            <h2 class="h5 mb-1"><%= product.name %></h2>
+            <p class="text-muted small mb-2"><strong>Country:</strong> <%= product.country %> | <strong>Platform:</strong> <%= product.platform %></p>
+            <p><%= product.description %></p>
+            <p class="fw-bold">Total: $<%= (product.price || 0).toFixed(2) %></p>
+          </div>
+        </div>
+        <hr/>
+        <% if (!product.isSold || (product.buyer && currentUser && product.buyer.toString() === currentUser.id)) { %>
+          <% if (!product.isSold) { %>
+            <form method="POST" action="/pay">
+              <input type="hidden" name="productId" value="<%= product._id %>"/>
+              <button class="btn btn-success w-100">Pay (Mock)</button>
+            </form>
+          <% } else { %>
+            <div class="alert alert-success">
+              <strong>Payment successful!</strong> Secret info unlocked below.
+            </div>
+            <div class="p-3 border rounded bg-light">
+              <pre class="m-0"><%= product.secretInfo %></pre>
+            </div>
+          <% } %>
+        <% } else { %>
+          <div class="alert alert-warning">This product has already been sold.</div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>
+<form method="POST" action="/checkout">
+  <button class="btn btn-success">Checkout</button>
+</form>
+
+<%- include('partials/footer') %>
