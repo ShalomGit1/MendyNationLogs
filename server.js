@@ -79,9 +79,10 @@ app.use((err, req, res, next) => {
     error: err.message || 'Something broke!',
     currentUser: req.session?.user || null,
     isAdmin: req.session?.isAdmin || false,
-    flash: req.session?.flash || {}   // ✅ added so EJS won't crash
+    flash: res.locals.flash || {}   // 👈 add this line
   });
 });
+
 
 // ---- Export app for Vercel ----
 module.exports = app;
