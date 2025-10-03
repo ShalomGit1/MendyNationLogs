@@ -16,12 +16,17 @@ const walletRoutes = require('./routes/walletRoutes');
 const app = express();
 
 // ---- Database ----
-// ❌ Removed localhost fallback (forces Atlas in production)
+// Only Atlas (no localhost fallback for production)
 const MONGO_URI = process.env.MONGO_URI;
 
-mongoose.connect(MONGO_URI)
+mongoose.connect(MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 5000, // fail fast if cannot connect
+  ssl: true
+})
   .then(() => console.log('✅ MongoDB connected'))
-  .catch(err => console.error('MongoDB connection error:', err));
+  .catch(err => console.error('❌ MongoDB connection error:', err));
 
 // ---- View engine & static ----
 app.set('view engine', 'ejs');
@@ -79,15 +84,14 @@ app.use((err, req, res, next) => {
     error: err.message || 'Something broke!',
     currentUser: req.session?.user || null,
     isAdmin: req.session?.isAdmin || false,
-    flash: res.locals.flash || {}   // 👈 add this line
+    flash: res.locals.flash || {}   // 👈 ensures flash is always defined
   });
 });
-
 
 // ---- Export app for Vercel ----
 module.exports = app;
 
-// ---- Local development (only runs if you call `node server.js`) ----
+// ---- Local development ----
 if (require.main === module) {
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
