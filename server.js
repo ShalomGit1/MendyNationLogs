@@ -16,7 +16,8 @@ const walletRoutes = require('./routes/walletRoutes');
 const app = express();
 
 // ---- Database ----
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/ecom_demo';
+// ❌ Removed localhost fallback (forces Atlas in production)
+const MONGO_URI = process.env.MONGO_URI;
 
 mongoose.connect(MONGO_URI)
   .then(() => console.log('✅ MongoDB connected'))
@@ -48,7 +49,7 @@ app.use(session({
 app.use((req, res, next) => {
   res.locals.currentUser = req.session?.user || null;
   res.locals.isAdmin = req.session?.isAdmin || false;
-  res.locals.flash = req.session?.flash || {};
+  res.locals.flash = req.session?.flash || {}; // ✅ always defined
   if (req.session) delete req.session.flash;
   next();
 });
@@ -77,7 +78,8 @@ app.use((err, req, res, next) => {
     title: 'Server Error',
     error: err.message || 'Something broke!',
     currentUser: req.session?.user || null,
-    isAdmin: req.session?.isAdmin || false
+    isAdmin: req.session?.isAdmin || false,
+    flash: req.session?.flash || {}   // ✅ added so EJS won't crash
   });
 });
 
