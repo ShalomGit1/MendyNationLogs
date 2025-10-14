@@ -3,7 +3,7 @@
 
 <form class="row g-3 mb-4" method="GET" action="/shop">
   <div class="col-md-4">
-    <label class="form-label">Country</label>
+    <label class="form-label">Category</label>
     <select class="form-select" name="country">
       <option value="">All</option>
       <% options.countries.forEach(c => { %>
@@ -12,7 +12,7 @@
     </select>
   </div>
   <div class="col-md-4">
-    <label class="form-label">Platform</label>
+    <label class="form-label">Product</label>
     <select class="form-select" name="platform">
       <option value="">All</option>
       <% options.platforms.forEach(p => { %>
@@ -40,7 +40,7 @@
         <% } %>
         <div class="card-body d-flex flex-column">
           <h5 class="card-title"><%= p.name %></h5>
-          <p class="card-text text-muted small mb-2"><strong>Country:</strong> <%= p.country %> | <strong>Platform:</strong> <%= p.platform %></p>
+          <p class="card-text text-muted small mb-2"><strong>Category:</strong> <%= p.country %> | <strong>Product:</strong> <%= p.platform %></p>
           <p class="flex-grow-1"><%= p.description %></p>
           <p class="fw-bold mb-3">Price: NGN<%= (p.price || 0).toFixed(2) %></p>
           <% if (p.isSold) { %>
